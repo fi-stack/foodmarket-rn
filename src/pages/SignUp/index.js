@@ -1,11 +1,14 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
+import {useSelector} from 'react-redux';
 import Button from '../../components/atoms/Button';
 import Gap from '../../components/atoms/Gap';
 import TextInput from '../../components/atoms/TextInput';
 import Header from '../../components/molecules/Headers';
 
 const SignUp = ({navigation}) => {
+  const globalState = useSelector(state => state.globalReducer);
+
   return (
     <View style={styles.page}>
       <Header title="Sign Up" subTitle="Register and eat" onBack={() => {}} />
@@ -17,6 +20,7 @@ const SignUp = ({navigation}) => {
             </View>
           </View>
         </View>
+        <Text>{`${globalState.isError}`}</Text>
         <TextInput label="Full Name" placeholder="Type your full name" />
         <Gap height={16} />
         <TextInput

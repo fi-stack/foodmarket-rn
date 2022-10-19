@@ -1,11 +1,21 @@
-import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import Header from '../../components/molecules/Headers';
-import TextInput from '../../components/atoms/TextInput';
+import {StyleSheet, View} from 'react-native';
 import Button from '../../components/atoms/Button';
 import Gap from '../../components/atoms/Gap';
+import TextInput from '../../components/atoms/TextInput';
+import Header from '../../components/molecules/Headers';
+import {useForm} from '../../utils';
 
 const SignIn = ({navigation}) => {
+  const [form, setForm] = useForm({
+    email: '',
+    password: '',
+  });
+
+  const onSubmit = () => {
+    console.log('form: ', form);
+  };
+
   return (
     <View style={styles.page}>
       <Header title="Sign In" subTitle="Find your best ever meal" />
@@ -13,11 +23,19 @@ const SignIn = ({navigation}) => {
         <TextInput
           label="Email Address"
           placeholder="Type your email address"
+          value={form.email}
+          onChangeText={value => setForm('email', value)}
         />
         <Gap height={16} />
-        <TextInput label="Password" placeholder="Type your password" />
+        <TextInput
+          label="Password"
+          placeholder="Type your password"
+          value={form.password}
+          onChangeText={value => setForm('password', value)}
+          secureTextEntry
+        />
         <Gap height={24} />
-        <Button text="Sign In" />
+        <Button text="Sign In" onPress={onSubmit} />
         <Gap height={12} />
         <Button
           text="Create New Account"
